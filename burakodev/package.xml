@@ -12,7 +12,7 @@
   <license>TODO</license>
 
 
-  
+  <build_depend>message_generation</build_depend>
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>rospy</build_depend>
   <build_depend>std.msgs</build_depend>
@@ -29,6 +29,7 @@
   <exec_depend>gazebo_ros</exec_depend>
   <exec_depend>turtlesim</exec_depend>
   <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>message_runtime</exec_depend>
 
 
   <!-- The export tag contains other, unspecified, tags -->
