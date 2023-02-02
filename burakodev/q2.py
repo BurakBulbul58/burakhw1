@@ -1,29 +1,26 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 import rospy
 from geometry_msgs.msg import Twist
- 
 
-def move_turtle(line_vel):
-    rospy.init_node("turtlemove", anonymous=True)
-    pub=rospy.Publisher("/turtle1/cmd_vel", Twist, queue_size=10)
-    rate =rospy.Rate(10)
-
-    vel = Twist()
-    while True:
-        vel.linear.x=line_vel
+def hiz_kontrol():
+    ref_hiz=1.0
+    vel=Twist()
+    rate=rospy.Rate(10)
+    while not rospy.is_shutdown():
+        
         vel.linear.y=0
         vel.linear.z=0
         vel.angular.x=0
         vel.angular.y=0
         vel.angular.z=0
+        if(vel.linear.x==ref_hiz):
+            publisher.publish(vel)
+            rate.sleep()
+        else:
+            vel.linear.x=ref_hiz
 
-        rospy.loginfo("Linear velocity is %f: ", line_vel)
-        pub.publish(vel)
-        rate.sleep()
 
 if __name__=="__main__":
-    while not rospy.is_shutdown():
-        try:
-            move_turtle(1.0)
-        except rospy.ROSInterruptException:
-            pass
+    rospy.init_node("hiz_kontrol",anonymous=True)
+    publisher=rospy.Publisher("/turtle1/cmd_vel",Twist,queue_size=10)
+    hiz_kontrol()
